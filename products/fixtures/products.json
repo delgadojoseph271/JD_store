@@ -1,0 +1,26 @@
+[
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "title": "bollo pre\u00f1ao",
+            "description": "masa de harina con una salchicha dentro",
+            "price": "2.50",
+            "slug": "bollo-prenao",
+            "image": "products/imagenes5081a.jpg",
+            "created_at": "2023-09-24T20:22:44.255Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "title": "bollo de maiz",
+            "description": "alimento a base de masa de maiz, en- vuelta en hojas de mazorca",
+            "price": "1.00",
+            "slug": "bollo-de-maiz",
+            "image": "products/bollo-de-mazorca-maiz-receta-colombiana.jpg",
+            "created_at": "2023-09-25T03:21:57.610Z"
+        }
+    }
+]
