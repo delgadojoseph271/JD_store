@@ -1,44 +1,39 @@
 """
 URL configuration for JD_store project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
+El `urlpatterns` lista las rutas de URL a vistas. Para más información, consulta:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 
-from django.urls import path
-from django.urls import include
+from django.contrib import admin  # Importa el módulo de administración de Django
+from django.urls import path, include  # Importa funciones para definir rutas
+from django.conf.urls.static import static  # Permite servir archivos estáticos
+from django.conf import settings  # Configuraciones del proyecto
 
-from django.conf.urls.static import static
-from django.conf import settings
-
-from . import views
-
-from products.views import ProductListView
+from . import views  # Importa las vistas definidas en el módulo actual
+from products.views import ProductListView  # Importa la vista de lista de productos
 
 urlpatterns = [
+    # Ruta para la página principal que muestra la lista de productos
     path('', ProductListView.as_view(), name='index'),  
-    path('usuarios/login', views.login_views, name='login'),
-    path('usuarios/logout', views.logout_views, name='logout'),
-    path('usuarios/registros', views.register, name='register'),
-    path('admin/', admin.site.urls),
-    path('productos/', include('products.urls')),
-    path('carrito/', include('carts.urls')),
-    path('orden/', include('orders.urls')),
-    path('direcciones/', include('shipping_addresses.urls')),
-    path('codigos/', include('promo_codes.urls')),
-    path('pagos/', include('billing_profiles.urls')),
+    
+    # Rutas para la gestión de usuarios
+    path('usuarios/login', views.login_views, name='login'),  # Vista de inicio de sesión
+    path('usuarios/logout', views.logout_views, name='logout'),  # Vista para cerrar sesión
+    path('usuarios/registros', views.register, name='register'),  # Vista de registro de usuarios
+    
+    # Ruta para el panel de administración
+    path('admin/', admin.site.urls),  
+    
+    # Inclusión de URLs de aplicaciones específicas
+    path('productos/', include('products.urls')),  # Rutas relacionadas con productos
+    path('carrito/', include('carts.urls')),  # Rutas relacionadas con el carrito de compras
+    path('orden/', include('orders.urls')),  # Rutas relacionadas con órdenes
+    path('direcciones/', include('shipping_addresses.urls')),  # Rutas para direcciones de envío
+    path('codigos/', include('promo_codes.urls')),  # Rutas para códigos promocionales
+    path('pagos/', include('billing_profiles.urls')),  # Rutas para perfiles de pago
 ]
 
+# Configuración para servir archivos multimedia en modo de desarrollo
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
